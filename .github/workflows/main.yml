@@ -1,0 +1,26 @@
+name: request-vscode-extensions
+on:
+  pull_request:
+    types:
+      - opened    
+  workflow_dispatch:
+jobs:
+
+  vscode-ext:
+    runs-on: 16cpu-64gb_ram-600gb_ssd-ubuntu2204  # github-hosted runner defined in org's 'large-runner-group'
+    steps:          
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Run docker
+        run: |
+           echo "Running Docker in $PWD ..."
+           mkdir -p packages/
+           docker pull lolinternet/vscsync
+           docker run -e SYNCARGS="--debug --frequency None --check-specified-extensions --update-extensions --update-malicious-extensions" -v $PWD/artifacts:/artifacts lolinternet/vscsync           
+           
+      - name: Upload to GitHub Actions Job Summary
+        uses: actions/upload-artifact@v4
+        with:
+          name: vscode-extensions
+          path: 'artifacts/**'
