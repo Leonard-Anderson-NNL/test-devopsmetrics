@@ -2,7 +2,8 @@ name: request-vscode-extensions
 on:
   pull_request:
     types:
-      - opened    
+      - opened   
+      - merged
   workflow_dispatch:
 jobs:
 
