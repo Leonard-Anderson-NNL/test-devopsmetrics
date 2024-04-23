@@ -8,7 +8,7 @@ on:
 jobs:
 
   vscode-ext:
-    runs-on: 16cpu-64gb_ram-600gb_ssd-ubuntu2204  # github-hosted runner defined in org's 'large-runner-group'
+    runs-on: ubuntu-latest  # github-hosted runner defined in org's 'large-runner-group'
     steps:          
       - name: Checkout
         uses: actions/checkout@v4
