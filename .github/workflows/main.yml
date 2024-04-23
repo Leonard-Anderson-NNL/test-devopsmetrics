@@ -4,6 +4,7 @@ on:
     types:
       - opened   
       - merged
+      - closed
   workflow_dispatch:
 jobs:
 
